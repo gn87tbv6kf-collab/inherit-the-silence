@@ -1,0 +1,14 @@
+/*
+  Тема. Здесь ты переопределяешь вид.
+  Примеры:
+  
+  :root {
+    --bg: #120a1a;
+    --accent: #ff4ecb;
+  }
+  .dialog-box {
+    background: rgba(30, 10, 40, 0.92);
+    border-color: rgba(255, 78, 203, 0.4);
+  }
+  .dialog-name { color: #ff4ecb; }
+*/
