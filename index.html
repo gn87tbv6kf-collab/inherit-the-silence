@@ -3,30 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>Visual Novel Debug</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Visual Novel</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/stage.css">
+<link rel="stylesheet" href="css/dialog.css">
+<link rel="stylesheet" href="css/menu.css">
+<link rel="stylesheet" href="css/theme.css">
 </head>
-<body style="background: black; color: white; font-family: monospace; padding: 20px; font-size: 14px;">
-  <div id="debug-log">ЗАГРУЗКА...</div>
+<body>
+<div id="app">
+  <div id="stage" class="stage">
+    <div class="layer layer-bg" id="layer-bg"></div>
 
-  <script>
-    const log = (msg) => {
-      document.getElementById('debug-log').innerHTML += '<br>' + msg;
-      console.log(msg);
-    };
+    <div class="layer layer-sprites" id="layer-sprites">
+      <div class="sprite-slot" data-pos="left"></div>
+      <div class="sprite-slot" data-pos="center"></div>
+      <div class="sprite-slot" data-pos="right"></div>
+    </div>
 
-    window.addEventListener('error', (e) => {
-      log('<span style="color:red">ОШИБКА: ' + e.message + '</span>');
-    });
+    <div class="layer layer-dialog" id="layer-dialog">
+      <div class="dialog-box hidden" id="dialog-box">
+        <div class="dialog-name" id="dialog-name"></div>
+        <div class="dialog-text" id="dialog-text"></div>
+        <div class="dialog-continue" id="dialog-continue">▼</div>
+      </div>
+    </div>
 
-    // Принудительно грузим модуль и ловим ошибку
-    log('Попытка загрузить engine/main.js...');
-    
-    import('./engine/main.js')
-      .then(() => log('МОДУЛЬ MAIN.JS УСПЕШНО ЗАГРУЖЕН!'))
-      .catch((err) => {
-        log('<span style="color:red">КРИТИЧЕСКАЯ ОШИБКА ЗАГРУЗКИ:<br>' + err.message + '</span>');
-        log('Стек: ' + (err.stack || 'нет стека'));
-      });
-  </script>
+    <div class="layer layer-choices" id="layer-choices"></div>
+  </div>
+</div>
+<script type="module" src="./engine/main.js"></script>
 </body>
 </html>
