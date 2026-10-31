@@ -12,16 +12,17 @@
 <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
+<!-- Вот сюда будут выводиться ошибки -->
+<div id="error-overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:black; color:#ff5555; padding:15px; z-index:9999; font-family:monospace; font-size:12px; overflow:auto; white-space:pre-wrap; word-wrap:break-word;"></div>
+
 <div id="app">
   <div id="stage" class="stage">
     <div class="layer layer-bg" id="layer-bg"></div>
-
     <div class="layer layer-sprites" id="layer-sprites">
       <div class="sprite-slot" data-pos="left"></div>
       <div class="sprite-slot" data-pos="center"></div>
       <div class="sprite-slot" data-pos="right"></div>
     </div>
-
     <div class="layer layer-dialog" id="layer-dialog">
       <div class="dialog-box hidden" id="dialog-box">
         <div class="dialog-name" id="dialog-name"></div>
@@ -29,10 +30,24 @@
         <div class="dialog-continue" id="dialog-continue">▼</div>
       </div>
     </div>
-
     <div class="layer layer-choices" id="layer-choices"></div>
   </div>
 </div>
-<script type="module" src="engine/main.js"></script>
+
+<!-- Ловим ошибки -->
+<script>
+  window.addEventListener('error', function(e) {
+    var el = document.getElementById('error-overlay');
+    el.style.display = 'block';
+    el.textContent += 'ОШИБКА:\n' + e.message + '\nФайл: ' + (e.filename || '') + '\nСтрока: ' + (e.lineno || '') + '\n\n';
+  });
+  window.addEventListener('unhandledrejection', function(e) {
+    var el = document.getElementById('error-overlay');
+    el.style.display = 'block';
+    el.textContent += 'ОШИБКА ЗАГРУЗКИ:\n' + (e.reason ? (e.reason.stack || e.reason) : 'Promise rejection') + '\n\n';
+  });
+</script>
+
+<script type="module" src="./engine/main.js"></script>
 </body>
 </html>
