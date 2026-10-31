@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Visual Novel</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/stage.css">
+<link rel="stylesheet" href="css/dialog.css">
+<link rel="stylesheet" href="css/menu.css">
+<link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+<div id="app">
+  <div id="stage" class="stage">
+    <div class="layer layer-bg" id="layer-bg"></div>
+
+    <div class="layer layer-sprites" id="layer-sprites">
+      <div class="sprite-slot" data-pos="left"></div>
+      <div class="sprite-slot" data-pos="center"></div>
+      <div class="sprite-slot" data-pos="right"></div>
+    </div>
+
+    <div class="layer layer-dialog" id="layer-dialog">
+      <div class="dialog-box hidden" id="dialog-box">
+        <div class="dialog-name" id="dialog-name"></div>
+        <div class="dialog-text" id="dialog-text"></div>
+        <div class="dialog-continue" id="dialog-continue">▼</div>
+      </div>
+    </div>
+
+    <div class="layer layer-choices" id="layer-choices"></div>
+  </div>
+</div>
+<script type="module" src="engine/main.js"></script>
+</body>
+</html>
